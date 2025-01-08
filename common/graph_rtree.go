@@ -27,7 +27,7 @@ func (e *edgeSpatial) Bounds() rtreego.Rect {
 		r = r.Extend(e.edge.Dst.Point)
 		e.rect = RtreegoRect(r)
 	}
-	return e.rect
+	return *e.rect
 }
 
 type Rtree struct {
