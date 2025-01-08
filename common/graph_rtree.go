@@ -6,7 +6,7 @@ import (
 	"math"
 )
 
-func RtreegoRect(r Rectangle) *rtreego.Rect {
+func RtreegoRect(r Rectangle) rtreego.Rect {
 	dx := math.Max(0.00000001, r.Max.X - r.Min.X)
 	dy := math.Max(0.00000001, r.Max.Y - r.Min.Y)
 	rect, err := rtreego.NewRect(rtreego.Point{r.Min.X, r.Min.Y}, []float64{dx, dy})
@@ -35,7 +35,7 @@ type Rtree struct {
 }
 
 func (rtree Rtree) Search(rect Rectangle) []*Edge {
-	spatials := rtree.tree.SearchIntersect(RtreegoRect(rect))
+	spatials := rtree.tree.SearchIntersect(*RtreegoRect(rect))
 	edges := make([]*Edge, len(spatials))
 	for i := range spatials {
 		edges[i] = spatials[i].(*edgeSpatial).edge
